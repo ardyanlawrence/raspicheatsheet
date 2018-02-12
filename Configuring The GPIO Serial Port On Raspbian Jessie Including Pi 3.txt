@@ -1,0 +1,19 @@
+-Enabling GPIO
+    $ sudo nano /boot/config.txt
+    and add the line (at the bottom):
+    enable_uart=1
+
+-Disabling the Console
+    For Raspberry Pi 3’s the command is similar but referencing /dev/ttyS0:
+    $ sudo systemctl stop serial-getty@ttyS0.service
+    $ sudo systemctl disable serial-getty@ttyS0.service
+
+    $ sudo nano /boot/cmdline.txt
+    you will see something like:
+    dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes root wait
+    remove the line: console=serial0,115200 and save and reboot for changes to take effect.
+
+-Swapping the Serial Ports on Raspberry Pi 3
+    $ sudo nano /boot/config.txt
+    dtoverlay=pi3-miniuart-bt
+    Save and reboot for changes to take effect.
