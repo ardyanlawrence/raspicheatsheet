@@ -1,0 +1,18 @@
+Setup a Static IP Address
+
+Find IP
+ip -4 addr show | grep global
+
+Find Gateway Address
+ip route | grep default | awk '{print $3}'
+
+Find DNS
+cat /etc/resolv.conf
+
+Edit /etc/dhcpcd.conf as follows:
+sudo nano /etc/dhcpcd.conf
+
+interface eth0
+static ip_address=IP
+static routers=Gateway
+static domain_name_servers=DNS
